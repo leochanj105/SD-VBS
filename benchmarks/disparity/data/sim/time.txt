@@ -1,0 +1,93 @@
+make: Entering directory '/home/leochanj/cortexsuite/vision/benchmarks/disparity/data/sim'
+
+-e Benchmark		- disparity
+/home/leochanj/cortexsuite/vision/common/c/readFile.c: In function ‘readFile’:
+/home/leochanj/cortexsuite/vision/common/c/readFile.c:22:5: warning: ignoring return value of ‘fscanf’, declared with attribute warn_unused_result [-Wunused-result]
+   22 |     fscanf(fp, "%d", &cols);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readFile.c:23:5: warning: ignoring return value of ‘fscanf’, declared with attribute warn_unused_result [-Wunused-result]
+   23 |     fscanf(fp, "%d", &rows);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readFile.c:31:13: warning: ignoring return value of ‘fscanf’, declared with attribute warn_unused_result [-Wunused-result]
+   31 |             fscanf(fp, "%f", &(subsref(fill,i,j)) );
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c: In function ‘readImage’:
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:48:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   48 |         fread(&signature,sizeof(signature),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:49:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   49 |         fread(&file_size,sizeof(file_size),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:50:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   50 |         fread(&reserved1,sizeof(reserved1),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:51:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   51 |         fread(&reserved2,sizeof(reserved2),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:52:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   52 |         fread(&loc_of_bitmap,sizeof(loc_of_bitmap),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:54:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   54 |         fread(&size_of_infoheader,sizeof(size_of_infoheader),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:55:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   55 |         fread(&width,sizeof(width),1,input); // Reads the width of the image
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:56:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   56 |         fread(&height,sizeof(height),1,input); // Reads the height of the image
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:57:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   57 |         fread(&number_of_planes,sizeof(number_of_planes),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:58:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   58 |         fread(&bits_per_pixel,sizeof(bits_per_pixel),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:59:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   59 |         fread(&compression_method,sizeof(compression_method),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:60:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   60 |         fread(&bytes_of_bitmap,sizeof(bytes_of_bitmap),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:62:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   62 |         fread(&hori_reso,sizeof(hori_reso),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:63:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   63 |         fread(&vert_reso,sizeof(vert_reso),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:64:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   64 |         fread(&no_of_colors,sizeof(no_of_colors),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:65:9: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   65 |         fread(&no_of_imp_colors,sizeof(no_of_imp_colors),1,input);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:84:21: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   84 |                     fread(&tempg,sizeof(unsigned char),1,input);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:95:21: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   95 |                     fread(&tempb,sizeof(unsigned char),1,input);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:96:21: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   96 |                     fread(&tempg,sizeof(unsigned char),1,input);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/readImage.c:97:21: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   97 |                     fread(&tempr,sizeof(unsigned char),1,input);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/selfCheck.c: In function ‘selfCheck’:
+/home/leochanj/cortexsuite/vision/common/c/selfCheck.c:33:9: warning: ignoring return value of ‘fscanf’, declared with attribute warn_unused_result [-Wunused-result]
+   33 |         fscanf(fd, "%d", &buffer[count]);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/leochanj/cortexsuite/vision/common/c/fSelfCheck.c: In function ‘fSelfCheck’:
+/home/leochanj/cortexsuite/vision/common/c/fSelfCheck.c:31:9: warning: ignoring return value of ‘fscanf’, declared with attribute warn_unused_result [-Wunused-result]
+   31 |         fscanf(fd, "%f", &buffer[count]);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-e Data set		- sim
+mkdir -p /home/leochanj/cortexsuite/vision/cycles/disparity
+Input size		- (54x72)
+Verification		- Successful
+Cycles elapsed		- 1348760
+
+make: Leaving directory '/home/leochanj/cortexsuite/vision/benchmarks/disparity/data/sim'
+
+real	0m2.348s
+user	0m1.895s
+sys	0m0.452s

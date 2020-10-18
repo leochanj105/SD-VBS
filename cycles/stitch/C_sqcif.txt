@@ -1,0 +1,5 @@
+Input size		- (96x128)
+Checking error: dimensions mismatch. Expected = 1344, Observed = 34816 
+Error in Stitch
+Cycles elapsed		- 34402655
+

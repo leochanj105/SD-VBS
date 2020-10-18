@@ -1,0 +1,5 @@
+Input size		- (1920x1080)
+Checking error: dimensions mismatch. Expected = 192128, Observed = 3559104 
+Error in Stitch
+Cycles elapsed		- 172437663118
+

@@ -1,0 +1,7 @@
+Input size		- (96x96)
+Cycles elapsed		- 78240855
+
+
+real	0m0.025s
+user	0m0.025s
+sys	0m0.000s

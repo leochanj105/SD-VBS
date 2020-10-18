@@ -1,0 +1,122 @@
+disparity            T	sim                  0m0.002s
+
+disparity            T	fullhd               0m1.503s
+
+disparity            T	test                 0m0.001s
+
+disparity            T	sqcif                0m0.012s
+
+disparity            T	qcif                 0m0.017s
+
+disparity            T	simfast              0m0.002s
+
+disparity            T	vga                  0m0.131s
+
+disparity            T	cif                  0m0.051s
+
+localization         T	sim                  0m0.001s
+
+localization         T	test                 0m0.001s
+
+localization         T	sqcif                0m0.004s
+
+localization         T	qcif                 0m0.019s
+
+localization         T	simfast              0m0.001s
+
+localization         T	vga                  0m0.163s
+
+localization         T	cif                  0m0.049s
+
+mser                 T	sim                  0m0.003s
+
+mser                 T	fullhd               0m0.407s
+
+mser                 T	test                 0m0.001s
+
+mser                 T	sqcif                0m0.003s
+
+mser                 T	qcif                 0m0.009s
+
+mser                 T	simfast              0m0.002s
+
+mser                 T	vga                  0m0.057s
+
+mser                 T	cif                  0m0.026s
+
+sift                 T	sim                  0m0.003s
+
+sift                 T	fullhd               0m1.478s
+
+sift                 T	test                 0m0.001s
+
+sift                 T	sqcif                0m0.017s
+
+sift                 T	qcif                 0m0.032s
+
+sift                 T	simfast              0m0.001s
+
+sift                 T	vga                  0m0.305s
+
+sift                 T	cif                  0m0.116s
+
+stitch               T	sim                  0m0.001s
+
+stitch               T	fullhd              0m19.256s
+
+stitch               T	test                 0m0.001s
+
+stitch               T	sqcif                0m0.011s
+
+stitch               T	qcif                 0m0.020s
+
+stitch               T	simfast              0m0.001s
+
+stitch               T	vga                  0m0.561s
+
+stitch               T	cif                  0m0.086s
+
+svm                  T	sim                  0m0.071s
+
+svm                  T	test                 0m0.070s
+
+svm                  T	sqcif                0m0.084s
+
+svm                  T	qcif                 0m0.084s
+
+svm                  T	simfast              0m0.068s
+
+svm                  T	cif                  0m0.127s
+
+texture_synthesis    T	sim                  0m0.002s
+
+texture_synthesis    T	fullhd               0m6.664s
+
+texture_synthesis    T	test                 0m0.001s
+
+texture_synthesis    T	sqcif                0m0.025s
+
+texture_synthesis    T	qcif                 0m0.005s
+
+texture_synthesis    T	simfast              0m0.001s
+
+texture_synthesis    T	vga                  0m0.032s
+
+texture_synthesis    T	cif                  0m0.012s
+
+tracking             T	sim                  0m0.003s
+
+tracking             T	fullhd               0m0.559s
+
+tracking             T	test                 0m0.001s
+
+tracking             T	sqcif                0m0.007s
+
+tracking             T	qcif                 0m0.015s
+
+tracking             T	simfast              0m0.002s
+
+tracking             T	vga                  0m0.098s
+
+tracking             T	cif                  0m0.032s
+

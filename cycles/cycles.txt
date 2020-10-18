@@ -1,0 +1,137 @@
+disparity            C	cif                 131052355
+
+disparity            C	simfast                642005
+
+disparity            C	fullhd             1608643794
+
+disparity            C	sim                   1335180
+
+disparity            C	sqcif                32040750
+
+disparity            C	test                    20720
+
+disparity            C	vga                 374062325
+
+disparity            C	qcif                 50802955
+
+localization         C	cif                 178616900
+
+localization         C	simfast                210700
+
+localization         C	sim                    549360
+
+localization         C	sqcif                11513040
+
+localization         C	test                    93135
+
+localization         C	vga                 565898025
+
+localization         C	qcif                 69411125
+
+mser                 C	cif                  49865060
+
+mser                 C	simfast               1719550
+
+mser                 C	fullhd             1077920830
+
+mser                 C	sim                   4935000
+
+mser                 C	sqcif                 2721145
+
+mser                 C	test                   222215
+
+mser                 C	vga                 136768905
+
+mser                 C	qcif                 18993590
+
+multi_ncut           C	cif                743828449767
+
+multi_ncut           C	simfast             100742320
+
+multi_ncut           C	fullhd             399702807342300
+
+multi_ncut           C	sim                11836706410
+
+multi_ncut           C	sqcif              11464894504
+
+multi_ncut           C	test                 13163675
+
+ERROR: INVALID INPUT FILE:cycles/multi_ncut/C_vga.txt
+multi_ncut           C	qcif               43232995071
+
+sift                 C	cif                 364259910
+
+sift                 C	simfast                855540
+
+sift                 C	fullhd             1745149254
+
+sift                 C	sim                   8099070
+
+sift                 C	sqcif                59811640
+
+sift                 C	test                   259910
+
+sift                 C	vga                 982870105
+
+sift                 C	qcif                111682480
+
+stitch               C	cif                 258856185
+
+stitch               C	simfast                242550
+
+stitch               C	fullhd             172437663118
+
+stitch               C	sim                    379575
+
+stitch               C	sqcif                34402655
+
+stitch               C	test                   135310
+
+stitch               C	vga                11694592515
+
+stitch               C	qcif                 70925785
+
+svm                  C	cif                 199129560
+
+svm                  C	simfast               3951465
+
+svm                  C	sim                   4929295
+
+svm                  C	sqcif                62015450
+
+svm                  C	test                   182700
+
+svm                  C	qcif                 69209980
+
+texture_synthesis    C	cif                  36349285
+
+texture_synthesis    C	simfast                655795
+
+texture_synthesis    C	fullhd             52679267235
+
+texture_synthesis    C	sim                   3767960
+
+texture_synthesis    C	sqcif                75622330
+
+texture_synthesis    C	test                   132405
+
+texture_synthesis    C	vga                 104629700
+
+texture_synthesis    C	qcif                 18295235
+
+tracking             C	cif                  69415640
+
+tracking             C	simfast               1072050
+
+tracking             C	fullhd              978459090
+
+tracking             C	sim                   2700530
+
+tracking             C	sqcif                13461595
+
+tracking             C	test                   250845
+
+tracking             C	vga                 164091340
+
+tracking             C	qcif                 26497030
+

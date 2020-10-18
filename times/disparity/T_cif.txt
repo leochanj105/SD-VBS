@@ -1,0 +1,6 @@
+File pointer error: No such file or directory
+/bin/bash: line 1: 413552 Segmentation fault      (core dumped) ./disparity /home/leochanj/cortexsuite/vision/benchmarks/disparity/data/cif
+
+real	0m0.253s
+user	0m0.007s
+sys	0m0.000s

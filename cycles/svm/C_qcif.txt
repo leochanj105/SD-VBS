@@ -1,0 +1,3 @@
+Input size		- (72x72x8)
+Cycles elapsed		- 69209980
+
