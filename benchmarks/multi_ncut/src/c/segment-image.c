@@ -82,7 +82,6 @@ I2D *segment_image(I2D* im, float sigma, float c, int min_size, int *num_ccs,
     //free(smooth_im);
 
     // segment
-    printf("num = %d\n", num);
     u = segment_graph(width*height, num, edges, c, edgeWeights, in, ind, u);
   
     // post process small components

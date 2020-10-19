@@ -3,7 +3,7 @@ Author: Sravanthi Kota Venkata
 ********************************/
 
 #include "mser.h"
-
+#include <malloc.h>
 #define min(a,b) (a<b)?a:b
 #define max(a,b) (a>b)?a:b
 
@@ -95,7 +95,7 @@ int main(int argc, char* argv[])
 	       out);
     endC = photonEndTiming();
     elapsed = photonReportTiming(start, endC);
-
+    //free(tt);
     printf("Input size\t\t- (%dx%d)\n", rows, cols);
 #ifdef CHECK   
     /** Self checking - use expected.txt from data directory  **/

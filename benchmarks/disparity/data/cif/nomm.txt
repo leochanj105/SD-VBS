@@ -1,0 +1,89 @@
+brk(NULL)                               = 0x55581171e000
+mmap(NULL, 47141, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7ff4943a6000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff4943a4000
+mmap(NULL, 1368336, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7ff494255000
+mmap(0x7ff494264000, 684032, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff494264000
+mmap(0x7ff49430b000, 618496, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xb6000) = 0x7ff49430b000
+mmap(0x7ff4943a2000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x14c000) = 0x7ff4943a2000
+mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7ff494063000
+mprotect(0x7ff494088000, 1847296, PROT_NONE) = 0
+mmap(0x7ff494088000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7ff494088000
+mmap(0x7ff494200000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7ff494200000
+mmap(0x7ff49424b000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7ff49424b000
+mmap(0x7ff494251000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff494251000
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff494060000
+mprotect(0x7ff49424b000, 12288, PROT_READ) = 0
+mprotect(0x7ff4943a2000, 4096, PROT_READ) = 0
+mprotect(0x555810a45000, 4096, PROT_READ) = 0
+mprotect(0x7ff4943df000, 4096, PROT_READ) = 0
+munmap(0x7ff4943a6000, 47141)           = 0
+brk(NULL)                               = 0x55581171e000
+brk(0x55581173f000)                     = 0x55581173f000
+mmap(NULL, 409600, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff493ffc000
+mmap(NULL, 409600, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff493f98000
+mmap(NULL, 409600, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff493f34000
+mmap(NULL, 409600, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff493ed0000
+mmap(NULL, 430080, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff493e67000
+mmap(NULL, 430080, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff493dfe000
+mmap(NULL, 430080, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff493d95000
+mmap(NULL, 430080, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff493d2c000
+mmap(NULL, 409600, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff493cc8000
+mmap(NULL, 430080, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff493c5f000
+mmap(NULL, 409600, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff493bfb000
+munmap(0x7ff493bfb000, 409600)          = 0
+brk(0x5558117a4000)                     = 0x5558117a4000
+munmap(0x7ff493f34000, 409600)          = 0
+munmap(0x7ff493d95000, 430080)          = 0
+munmap(0x7ff493d2c000, 430080)          = 0
+munmap(0x7ff493dfe000, 430080)          = 0
+munmap(0x7ff493e67000, 430080)          = 0
+munmap(0x7ff493c5f000, 430080)          = 0
+munmap(0x7ff493cc8000, 409600)          = 0
+munmap(0x7ff493ffc000, 409600)          = 0
+munmap(0x7ff493f98000, 409600)          = 0
+munmap(0x7ff493ed0000, 409600)          = 0
+imalloc happened
+imalloc happened
+fmalloc happened
+imalloc happened
+imalloc happened
+imalloc happened
+imalloc happened
+fmalloc happened
+fmalloc happened
+fmalloc happened
+imalloc happened
+imalloc happened
+starting..
+Iteration 0:
+ppp
+Cycles elapsed		- 124047455
+
+Input size		- (288x352)
+Verification		- Successful
+Iteration 1:
+ppp
+Cycles elapsed		- 118237420
+
+Input size		- (288x352)
+Verification		- Successful
+Iteration 2:
+ppp
+Cycles elapsed		- 116454100
+
+Input size		- (288x352)
+Verification		- Successful
+Iteration 3:
+ppp
+Cycles elapsed		- 115923570
+
+Input size		- (288x352)
+Verification		- Successful
+Iteration 4:
+ppp
+Cycles elapsed		- 115679340
+
+Input size		- (288x352)
+Verification		- Successful
+ending
++++ exited with 0 +++

@@ -5,12 +5,14 @@ Author: Sravanthi Kota Venkata
 #include <stdio.h>
 #include <stdlib.h>
 #include "sift.h"
-
+#include <malloc.h>
+#define SIFT_MEM 1<<29
 void normalizeImage(F2D* image)
 {
 	int i;
 	int rows;
 	int cols;
+ 
     int tempMin = 10000, tempMax = -1;
 	rows = image->height;
 	cols = image->width;
@@ -46,6 +48,8 @@ int main(int argc, char* argv[])
         return -1;
     }
 
+    mallopt(M_TOP_PAD, SIFT_MEM);
+    mallopt(M_MMAP_MAX, 0);
     sprintf(imSrc, "%s/1.bmp", argv[1]);
 
     im = readImage(imSrc);
@@ -57,7 +61,8 @@ int main(int argc, char* argv[])
 
     int iter = 5;
     printf("start\n");
-    for(int it = 0; it < 5; it++){
+
+   for(int it = 0; it < iter; it++){
 	    printf("Iteration %d\n", it);
     startTime = photonStartTiming();
     /** Normalize the input image to lie between 0-1 **/

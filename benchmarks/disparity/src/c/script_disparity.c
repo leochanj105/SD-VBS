@@ -5,6 +5,7 @@ Author: Sravanthi Kota Venkata
 #include <stdio.h>
 #include <stdlib.h>
 #include "disparity.h"
+#include <malloc.h>
 
 int main(int argc, char* argv[])
 {
@@ -83,11 +84,18 @@ int main(int argc, char* argv[])
 
     range = iMallocHandle(1, 2);
 
+    //int *sss = (int*)malloc(sizeof(int) * 32768000);
+    //mallopt(M_TOP_PAD, 1 << 24);
+    //mallopt(M_MMAP_MAX, 0);
     //starting point of benchmarks
     printf("starting..\n");
-    int iter = 20;
+    int iter = 5;
+    //sbrk(1<<4);
     for(int i = 0; i < iter; i++){
 	    printf("Iteration %d:\n", i);
+
+	    //int *ppp = (int*)malloc(sizeof(int) * 32768);
+
     start = photonStartTiming();
     retDisparity = getDisparity(imleft, imright, WIN_SZ, SHIFT, 
 		   minSAD, retDisp, halfWin,
@@ -98,6 +106,9 @@ int main(int argc, char* argv[])
     elapsed = photonReportTiming(start, endC);
     photonPrintTiming(elapsed);
     printf("Input size\t\t- (%dx%d)\n", rows, cols);
+
+    //free(ppp);
+
 #ifdef CHECK   
     /** Self checking - use expected.txt from data directory  **/
     {
@@ -116,8 +127,9 @@ int main(int argc, char* argv[])
     }
     printf("ending\n");
     //end of benchmark
-    
+    //sbrk(1<<4);
     //fFreeHandle(retSAD);
+    //free(sss);
     fFreeHandle(minSAD);
     fFreeHandle(SAD);
     fFreeHandle(integralImg);
