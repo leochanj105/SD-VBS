@@ -47,22 +47,27 @@ int main(int argc, char* argv[])
     }
 
     sprintf(imSrc, "%s/1.bmp", argv[1]);
-    startTime = photonStartTiming();
 
     im = readImage(imSrc);
-    endTime = photonEndTiming();
-    elapsed = photonReportTiming(startTime, endTime);
-    photonPrintTiming(elapsed);
     image = fiDeepCopy(im);
-    iFreeHandle(im);
+    //iFreeHandle(im);
     rows = image->height;
     cols = image->width;
 
+
+    int iter = 5;
+    printf("start\n");
+    for(int it = 0; it < 5; it++){
+	    printf("Iteration %d\n", it);
     startTime = photonStartTiming();
     /** Normalize the input image to lie between 0-1 **/
+
+    image = fiDeepCopy(im);
 	normalizeImage(image);
+
     /** Extract sift features for the normalized image **/
     frames = sift(image);
+
     endTime = photonEndTiming();
 
     printf("Input size\t\t- (%dx%d)\n", rows, cols);
@@ -82,11 +87,13 @@ int main(int argc, char* argv[])
 
     elapsed = photonReportTiming(startTime, endTime);
     photonPrintTiming(elapsed);
-    
+    }
+    printf("end\n");
     //free(startTime);
     //free(endTime);
     //free(elapsed);
-
+    iFreeHandle(im);
+    //fFreeHandle(image);
     fFreeHandle(frames);
 
     return 0;

@@ -6,15 +6,14 @@ Author: Sravanthi Kota Venkata
 #include <stdlib.h>
 #include "sdvbs_common.h"
 
-I2D* iMallocHandle(int rows, int cols)
+F2D* fResetHandle(F2D* out, int rows, int cols)
 {
     int i, j;
-    I2D* out;
+    //F2D* out;
    
-    out = (I2D*)malloc(sizeof(I2D) + sizeof(int)*rows*cols);
+    //out = (F2D*)malloc(sizeof(F2D) + sizeof(float)*rows*cols);
     out->height = rows;
     out->width = cols;
-    printf("imalloc happened\n");
+    //printf("fmalloc happened\n");
     return out;
 }
-

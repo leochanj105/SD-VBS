@@ -121,7 +121,6 @@ F2D* sift(F2D* I)
     dogss = diffss(gss, Octaves, intervals);
 
     /** The extraction of keypoints is carried one octave per time **/
-
     for(o=0; o<Octaves; o++)
     {
         F2D *temp;

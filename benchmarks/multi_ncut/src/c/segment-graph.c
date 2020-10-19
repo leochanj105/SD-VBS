@@ -36,25 +36,26 @@ void join(universe* u, int x, int y)
     return ;
 }
 
-universe *segment_graph(int num_vertices, int num_edges, edge *edges, float c) 
+universe *segment_graph(int num_vertices, int num_edges, edge *edges, float c, F2D* edgeWeights, F2D* in, I2D* ind,
+		        universe* u)
 { 
     float threshold[num_vertices];
     int i, a, b, j, k;
-    universe *u;
-    F2D *edgeWeights;
+    //universe *u;
+    //F2D *edgeWeights;
     I2D *indices;
 
-    edgeWeights = fMallocHandle(1,num_edges);
+    edgeWeights = fResetHandle(edgeWeights,1,num_edges);
 
     for(i=0; i<num_edges; i++)
         asubsref(edgeWeights,i) = edges[i].w;
 
     // sort edges by weight
-    indices = fSortIndices(edgeWeights,1);
+    indices = fResortIndices(edgeWeights,1, in, ind);
 
     // make a disjoint-set forest
-    u = (universe*)malloc(sizeof(universe));
-    u->elts = (uni_elt*)malloc(sizeof(uni_elt)*num_vertices);
+    //u = (universe*)malloc(sizeof(universe));
+    //u->elts = (uni_elt*)malloc(sizeof(uni_elt)*num_vertices);
     u->num = num_vertices;
     for(i=0; i<num_vertices; i++)
     {
@@ -86,8 +87,8 @@ universe *segment_graph(int num_vertices, int num_edges, edge *edges, float c)
         }
     }
 
-    fFreeHandle(edgeWeights);
-    iFreeHandle(indices);
+    //fFreeHandle(edgeWeights);
+    //iFreeHandle(indices);
 
   return u;
 }

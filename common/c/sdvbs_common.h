@@ -42,6 +42,7 @@ F2D* readFile(unsigned char* fileName);
 /** Memory allocation functions **/
 I2D* iMallocHandle(int rows, int cols);
 F2D* fMallocHandle(int rows, int cols);
+F2D* fResetHandle(F2D* out, int rows, int cols);
 UI2D* uiMallocHandle(int rows, int cols);
 
 void iFreeHandle(I2D* out);
@@ -55,6 +56,7 @@ F2D* fSetArray(int rows, int cols, float val);
 void fResetArray(F2D* out, int rows, int cols, float val);
 I2D* iDeepCopy(I2D* in);
 F2D* fDeepCopy(F2D* in);
+F2D* fCopy(F2D* in, F2D* out);
 I2D* iDeepCopyRange(I2D* in, int startRow, int numberRows, int startCol, int numberCols);
 F2D* fDeepCopyRange(F2D* in, int startRow, int numberRows, int startCol, int numberCols);
 F2D* fiDeepCopy(I2D* in);
@@ -103,6 +105,7 @@ I2D* iiConv2(I2D* a, I2D* b);
 /** Image Transformations - resize, integration etc **/
 F2D* imageResize(F2D* imageIn);
 F2D* imageBlur(I2D* imageIn);
+F2D* imageReblur(I2D* imageIn,  F2D* imageOut, F2D* tempOut, I2D* kernel);
 
 
 /** Support functions **/
@@ -113,6 +116,7 @@ I2D* iSort(I2D* in, int dim);
 F2D* fSort(F2D* in, int dim);
 I2D* iSortIndices(I2D* in, int dim);
 I2D* fSortIndices(F2D* input, int dim);
+I2D* fResortIndices(F2D* input, int dim, F2D* in, I2D* ind);
 F2D* randnWrapper(int m, int n);
 F2D* randWrapper(int m, int n);
 

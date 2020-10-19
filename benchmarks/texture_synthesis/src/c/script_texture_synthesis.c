@@ -24,6 +24,14 @@ int  main(int argc, char **argv)
     image = fiDeepCopy(im);
     init_params(data);
 
+    int iter = 5;
+    printf("start.\n");
+    for(int i = 0; i < iter; i++){
+	    printf("Iteration %d\n",i);
+	    image = fiDeepCopy(im);
+	    init_params(data);
+	    //printf("%d,%d\n",data->heightout, data->widthout);
+	    
     start = photonStartTiming();
     create_texture(image, data);
     end = photonEndTiming();
@@ -41,12 +49,12 @@ int  main(int argc, char **argv)
 }
 #endif
     photonPrintTiming(elapsed);
-    
+    }
     iFreeHandle(im);
     fFreeHandle(image);
-    free(start);
-    free(end);
-    free(elapsed);
+    //free(start);
+    //free(end);
+    //free(elapsed);
     free(data);
 
     fFreeHandle(target);

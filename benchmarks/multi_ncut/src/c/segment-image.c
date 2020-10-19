@@ -17,23 +17,28 @@ float diff(F2D *r, int x1, int y1, int x2, int y2)
   return sqrt(abs(( subsref(r,y1,x1) * subsref(r,y1,x1)) - ( subsref(r,y2,x2) * subsref(r,y2,x2))));
 }
 
-I2D *segment_image(I2D* im, float sigma, float c, int min_size, int *num_ccs) 
+I2D *segment_image(I2D* im, float sigma, float c, int min_size, int *num_ccs, 
+		   int* segments, edge* edges,
+                   F2D* imageOut, F2D* tempOut, I2D* kernel, 
+		   F2D* edgeWeights, F2D* in, I2D* ind,
+		   universe* u,
+		   I2D* output)
 {
     int width = im->width;
     int height = im->height;
     int num = 0, x, y, i;
     F2D* smooth_im;
-    I2D *output;
-    edge* edges;
+    //I2D *output;
+    //edge* edges;
     int components = 0;
 /*  int *colors = (int *) malloc(width*height*sizeof(int)); */
-    int *segments = (int *) malloc(height*width*sizeof(int));
+    //segments = (int *) malloc(height*width*sizeof(int));
 
     // smooth each color channel  
-    smooth_im = imageBlur(im);
+    smooth_im = imageReblur(im, imageOut, tempOut, kernel);
 
     //build graph
-    edges = (edge*)malloc(sizeof(edge)*width*height*4);
+    //edges = (edge*)malloc(sizeof(edge)*width*height*4);
 
     for (y = 0; y < height; y++) 
     {
@@ -74,10 +79,11 @@ I2D *segment_image(I2D* im, float sigma, float c, int min_size, int *num_ccs)
         }
     }
 
-    free(smooth_im);
+    //free(smooth_im);
 
     // segment
-    universe *u = segment_graph(width*height, num, edges, c);
+    printf("num = %d\n", num);
+    u = segment_graph(width*height, num, edges, c, edgeWeights, in, ind, u);
   
     // post process small components
     for (i = 0; i < num; i++) 
@@ -89,11 +95,11 @@ I2D *segment_image(I2D* im, float sigma, float c, int min_size, int *num_ccs)
             join(u, a, b);
     }
 
-    free(edges);
+    //free(edges);
     arrayref(num_ccs,0) = u->num;
 
     // pick random colors for each component
-    output = iMallocHandle(height, width);
+    //output = iMallocHandle(height, width);
 
 /*    srand(time(0));
     for (i = 0; i < width*height; i++)
@@ -127,9 +133,9 @@ I2D *segment_image(I2D* im, float sigma, float c, int min_size, int *num_ccs)
         }
     }  
 */
-    free(u->elts);
-    free(u);
-    free(segments);
+    //free(u->elts);
+    //free(u);
+    //free(segments);
     
     return output;
 }

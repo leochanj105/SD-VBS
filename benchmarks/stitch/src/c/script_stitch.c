@@ -67,10 +67,10 @@ int main(int argc, char* argv[])
     fFreeHandle(int1);
     fFreeHandle(int2);
     fFreeHandle(Fcur);
-    free(start);
-    free(endC);
+    //free(start);
+    //free(endC);
 
     photonPrintTiming(elapsed);
-    free(elapsed);
+    //free(elapsed);
     return 0;
 }

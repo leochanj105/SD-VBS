@@ -4,10 +4,10 @@ Author: Sravanthi Kota Venkata
 
 #include "sdvbs_common.h"
 
-void fiCopy(F2D* out, I2D* in)
+F2D* fCopy(F2D* in, F2D* out)
 {
     int i, j;
-    //F2D *out;
+    //F2D* out;
     int rows, cols;
     
     rows = in->height;
@@ -15,9 +15,10 @@ void fiCopy(F2D* out, I2D* in)
 
     //out = fMallocHandle(rows, cols);
     
-    for(i=0; i<rows; i++)
-        for(j=0; j<cols; j++)
-            subsref(out,i,j) = subsref(in,i,j) + 0.0;
-
-    //return out;
+    for(i=0; i<rows; i++) {
+        for(j=0; j<cols; j++) {
+            subsref(out,i,j) = subsref(in,i,j);
+		}
+   	} 
+    return out;
 }

@@ -84,6 +84,10 @@ int main(int argc, char* argv[])
     sprintf(im1, "%s/d16tst_2.txt", argv[1]);
     tst2 = readFile(im1);       
 
+    int iteration = 5;
+    printf("start.\n");
+    for(int it = 0; it< iteration;it++){
+	    printf("Iteration %d\n", it);
     /** Start timing **/
     start = photonStartTiming();
 
@@ -151,7 +155,10 @@ int main(int argc, char* argv[])
     }
     /** Self checking done **/
 #endif
-        
+
+    elapsed = photonReportTiming(start, stop);
+    photonPrintTiming(elapsed);
+    }    
     fFreeHandle(trn1);
     fFreeHandle(tst1);
     fFreeHandle(trn2);
@@ -164,11 +171,9 @@ int main(int argc, char* argv[])
     free(alpha);
     fFreeHandle(Xtst);
     fFreeHandle(Ytst);
-    elapsed = photonReportTiming(start, stop);
-    photonPrintTiming(elapsed);
-    free(start);
-    free(stop);
-    free(elapsed);
+    //free(start);
+    //free(stop);
+    //free(elapsed);
 
     return 0;
 }
