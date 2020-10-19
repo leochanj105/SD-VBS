@@ -11,7 +11,10 @@ int main(int argc, char* argv[])
     int rows = 32;
     int cols = 32;
     I2D *imleft, *imright, *retDisparity;
-
+    I2D *IrightPadded, *IleftPadded, *Iright_moved;
+    I2D *retDisp, *halfWin;
+    I2D *range;
+    F2D *retSAD, *minSAD, *SAD, *integralImg;
     unsigned int *start, *endC, *elapsed;
     
     int i, j;
@@ -47,10 +50,53 @@ int main(int argc, char* argv[])
     SHIFT = 8;
 #endif
 
-    start = photonStartTiming();
-    retDisparity = getDisparity(imleft, imright, WIN_SZ, SHIFT);
-    endC = photonEndTiming();
 
+    int nr, nc, k;
+    int half_win_sz;
+    nr = imleft->height;
+    nc = imleft->width;
+    half_win_sz = WIN_SZ / 2;
+
+    minSAD = fSetArray(nr, nc, 255.0*255.0);
+    retDisp = iSetArray(nr, nc, SHIFT);
+    halfWin = iSetArray(1,2,half_win_sz);
+
+
+    if(WIN_SZ > 1)
+    {
+        IleftPadded = padarray2(imleft, halfWin);
+        IrightPadded = padarray2(imright, halfWin);
+    }
+    else
+    {
+        IleftPadded = imleft;
+        IrightPadded = imright;
+    }
+
+    int paddedRows, paddedCols;
+    paddedRows = IleftPadded->height;
+    paddedCols = IleftPadded->width;
+    SAD = fSetArray(paddedRows, paddedCols,255);
+    integralImg = fSetArray(paddedRows, paddedCols,0);
+    retSAD = fMallocHandle(paddedRows- WIN_SZ, paddedCols - WIN_SZ);
+    Iright_moved = iSetArray(paddedRows, paddedCols, 0);
+
+    range = iMallocHandle(1, 2);
+
+    //starting point of benchmarks
+    printf("starting..\n");
+    int iter = 20;
+    for(int i = 0; i < iter; i++){
+	    printf("Iteration %d:\n", i);
+    start = photonStartTiming();
+    retDisparity = getDisparity(imleft, imright, WIN_SZ, SHIFT, 
+		   minSAD, retDisp, halfWin,
+		   IrightPadded, IleftPadded, Iright_moved,
+		   retSAD, SAD, integralImg,
+		   range);
+    endC = photonEndTiming();
+    elapsed = photonReportTiming(start, endC);
+    photonPrintTiming(elapsed);
     printf("Input size\t\t- (%dx%d)\n", rows, cols);
 #ifdef CHECK   
     /** Self checking - use expected.txt from data directory  **/
@@ -67,15 +113,26 @@ int main(int argc, char* argv[])
     /** Self checking done **/
 #endif
 
-    elapsed = photonReportTiming(start, endC);
-    photonPrintTiming(elapsed);
+    }
+    printf("ending\n");
+    //end of benchmark
     
+    //fFreeHandle(retSAD);
+    fFreeHandle(minSAD);
+    fFreeHandle(SAD);
+    fFreeHandle(integralImg);
+    iFreeHandle(IrightPadded);
+    iFreeHandle(IleftPadded);
+    iFreeHandle(Iright_moved);
+    fFreeHandle(retSAD);
     iFreeHandle(imleft);
     iFreeHandle(imright);
     iFreeHandle(retDisparity);
-    free(start);
-    free(endC);
-    free(elapsed);
+    iFreeHandle(halfWin);
+    iFreeHandle(range);
+    //free(start);
+    //free(endC);
+    //free(elapsed);
 
     return 0;
 }

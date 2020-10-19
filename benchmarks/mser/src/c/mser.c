@@ -19,44 +19,6 @@ Author: Sravanthi Kota Venkata
 #include "mser.h"
 #include <string.h>
 
-#define MIN(a,b) (a<b)?a:b
-#define MAX(a,b) (a>b)?a:b
-
-typedef int  unsigned idx_t ;
-typedef long long int unsigned acc_t ;
-
-/* pairs are used to sort the pixels */
-typedef struct 
-{
-  val_t value ; 
-  idx_t  index ;
-} pair_t ;
-
-/* forest node */
-typedef struct
-{
-  idx_t parent ;   /**< parent pixel         */
-  idx_t shortcut ; /**< shortcut to the root */
-  idx_t region ;   /**< index of the region  */
-  int   area ;     /**< area of the region   */
-#ifdef USE_RANK_UNION
-  int   height ;    /**< node height         */
-#endif
-} node_t ;
-
-/* extremal regions */
-typedef struct
-{
-  idx_t parent ;     /**< parent region                           */
-  idx_t index ;      /**< index of root pixel                     */
-  val_t value ;      /**< value of root pixel                     */
-  int   area ;       /**< area of the region                      */
-  int   area_top ;   /**< area of the region DELTA levels above   */
-  int   area_bot  ;  /**< area of the region DELTA levels below   */
-  float variation ;  /**< variation                               */
-  int   maxstable ;  /**< max stable number (=0 if not maxstable) */
-} region_t ;
-
 /* advance N-dimensional subscript */
 void
 adv(iArray *dims, int ndims, iArray *subs_pt)
@@ -72,7 +34,14 @@ adv(iArray *dims, int ndims, iArray *subs_pt)
 }
 
 /** driver **/
-I2D* mser(I2D* I, int in_delta)
+I2D* mser(I2D* I, int in_delta,
+          iArray* subs_pt, iArray* nsubs_pt, iArray* strides_pt, iArray* visited_pt, iArray* dims, 
+	  uiArray* joins_pt,
+	  region_t* regions_pt, 
+	  pair_t* pairs_pt,
+	  node_t* forest_pt,
+	  ulliArray* acc_pt, ulliArray* ell_pt,
+	  I2D* out)
 {
    idx_t i, rindex=0;
    int k;
@@ -84,7 +53,7 @@ I2D* mser(I2D* I, int in_delta)
    int OUT_AREA = 3;
    int BUCKETS = 256;
    
-   I2D* out;
+   //I2D* out;
 
    int IN_I = 0;
    int IN_DELTA = 1;   
@@ -100,31 +69,31 @@ I2D* mser(I2D* I, int in_delta)
     /* node value denoting a void node */
     idx_t const node_is_void = 0xffffffff ;
 
-    iArray*   subs_pt ;       /* N-dimensional subscript                 */
-    iArray*   nsubs_pt ;      /* diff-subscript to point to neigh.       */
-    uiArray* strides_pt ;    /* strides to move in image array          */
-    uiArray* visited_pt ;    /* flag                                    */
+    //iArray*   subs_pt ;       /* N-dimensional subscript                 
+    //iArray*   nsubs_pt ;      /* diff-subscript to point to neigh.       
+//    uiArray* strides_pt ;    /* strides to move in image array          
+//    uiArray* visited_pt ;    /* flag                                    
 
     int nel ;              /* number of image elements (pixels)       */
     int ner = 0 ;          /* number of extremal regions              */
     int nmer = 0 ;         /* number of maximally stable              */
     int ndims ;            /* number of dimensions                    */
-    iArray* dims ;           /* dimensions                              */
+//    iArray* dims ;           /* dimensions                              
     int njoins = 0 ;       /* number of join ops                      */
 
     I2D* I_pt ;    /* source image                            */
-    pair_t*   pairs_pt ;   /* scratch buffer to sort pixels           */
-    node_t*   forest_pt ;  /* the extremal regions forest             */
-    region_t* regions_pt ; /* list of extremal regions found          */ 
+    //pair_t*   pairs_pt ;   /* scratch buffer to sort pixels           
+//    node_t*   forest_pt ;  /* the extremal regions forest             
+//    region_t* regions_pt ; /* list of extremal regions found          
     int regions_pt_size;
     int pairs_pt_size;
     int forest_pt_size;
 
     /* ellipses fitting */
-    ulliArray* acc_pt ;        /* accumulator to integrate region moments */
-    ulliArray* ell_pt ;        /* ellipses parameters                     */
+    //ulliArray* acc_pt ;        /* accumulator to integrate region moments
+    //ulliArray* ell_pt ;        /* ellipses parameters                     
     int    gdl ;           /* number of parameters of an ellipse      */
-    uiArray* joins_pt ;      /* sequence of joins                       */
+    //uiArray* joins_pt ;      /* sequence of joins                       
    
     delta = 0;
     delta = in_delta;
@@ -133,27 +102,27 @@ I2D* mser(I2D* I, int in_delta)
 
     nel = I->height*I->width;            /* number of elements of src image */
     ndims = 2;
-    dims = malloc(sizeof(iArray) + sizeof(int)*ndims);
+    //dims = malloc(sizeof(iArray) + sizeof(int)*ndims);
     I_pt = I;
     
     sref(dims,0) = I->height;
     sref(dims,1) = I->width;
     
     /* allocate stuff */
-    subs_pt = malloc(sizeof(iArray) + sizeof(int)*ndims);
-    nsubs_pt = malloc(sizeof(iArray) + sizeof(int)*ndims);
+    //subs_pt = malloc(sizeof(iArray) + sizeof(int)*ndims);
+    //nsubs_pt = malloc(sizeof(iArray) + sizeof(int)*ndims);
 
-    strides_pt = malloc(sizeof(uiArray)+sizeof(unsigned int)*ndims);
-    visited_pt = malloc(sizeof(uiArray) + sizeof(unsigned int)*nel);
-    joins_pt = malloc(sizeof(uiArray) + sizeof(unsigned int)*nel);
+    //strides_pt = malloc(sizeof(uiArray)+sizeof(unsigned int)*ndims);
+    //visited_pt = malloc(sizeof(uiArray) + sizeof(unsigned int)*nel);
+    //joins_pt = malloc(sizeof(uiArray) + sizeof(unsigned int)*nel);
 
-    regions_pt = (region_t*)malloc(sizeof(region_t)*nel);
+    //regions_pt = (region_t*)malloc(sizeof(region_t)*nel);
     regions_pt_size = nel;
 
-    pairs_pt = (pair_t*)malloc(sizeof(pair_t)*nel);
+    //pairs_pt = (pair_t*)malloc(sizeof(pair_t)*nel);
     pairs_pt_size = nel;
 
-    forest_pt = (node_t*)malloc(sizeof(node_t)*nel);
+    //forest_pt = (node_t*)malloc(sizeof(node_t)*nel);
     forest_pt_size = nel;
 
     /* compute strides to move into the N-dimensional image array */
@@ -619,7 +588,8 @@ I2D* mser(I2D* I, int in_delta)
     /* -----------------------------------------------------------------
     *                                                      Fit ellipses
     * -------------------------------------------------------------- */
-    ell_pt = 0 ;
+    //ell_pt = 0 ;
+    //memset(ell_pt, sizeof(ulliArray) + sizeof(acc_t)*gdl*nmer, 0) ; 
     if (nout >= 1) 
     {
         int midx = 1 ;
@@ -633,8 +603,9 @@ I2D* mser(I2D* I, int in_delta)
         }
     
         /* allocate space */
-        acc_pt = malloc(sizeof(ulliArray) + sizeof(acc_t)*nel) ;
-        ell_pt = malloc(sizeof(ulliArray) + sizeof(acc_t)*gdl*nmer) ; 
+        //acc_pt = malloc(sizeof(ulliArray) + sizeof(acc_t)*nel) ;
+	//printf("nmer = %d\n", nmer);
+        //ell_pt = malloc(sizeof(ulliArray) + sizeof(acc_t)*gdl*nmer) ; 
    
         /* clear accumulators */
         for(d=0; d<(gdl*nmer); d++)
@@ -695,8 +666,8 @@ I2D* mser(I2D* I, int in_delta)
 
             /* next gdl */
         }
-        free(acc_pt) ;
-        free(ell_pt) ;
+        //free(acc_pt) ;
+        //free(ell_pt) ;
     }
   
     /* -----------------------------------------------------------------
@@ -710,7 +681,9 @@ I2D* mser(I2D* I, int in_delta)
         int dims[2], j=0;
         I2D* pt ;
         dims[0] = nmer ;
-        out = iMallocHandle(1, nmer);
+        //out = iMallocHandle(1, nmer);
+	out->height = 1;
+	out->width = nmer;
         pt = out;
         for (i = 0 ; i < ner ; ++i) 
         {
@@ -724,15 +697,15 @@ I2D* mser(I2D* I, int in_delta)
     }
 
     /* free stuff */
-    free(dims);
-    free( forest_pt  ) ;
-    free( pairs_pt   ) ;
-    free( regions_pt ) ;
-    free( visited_pt ) ;
-    free( strides_pt ) ;
-    free( nsubs_pt   ) ;
-    free( subs_pt    ) ;
-    free( joins_pt    ) ;
+    //free(dims);
+    //free( forest_pt  ) ;
+    //free( pairs_pt   ) ;
+    //free( regions_pt ) ;
+    //free( visited_pt ) ;
+    //free( strides_pt ) ;
+    //free( nsubs_pt   ) ;
+    //free( subs_pt    ) ;
+    //free( joins_pt    ) ;
 
     return out;
 }

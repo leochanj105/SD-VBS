@@ -14,7 +14,7 @@ UI2D* uiMallocHandle(int rows, int cols)
     out = malloc(sizeof(UI2D) + sizeof(unsigned int)*rows*cols);
     out->height = rows;
     out->width = cols;
-    
+    printf("uimalloc here\n");
     return out;
 }
 

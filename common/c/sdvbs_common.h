@@ -50,12 +50,15 @@ void uiFreeHandle(UI2D* out);
 
 /** Memory copy/set function **/
 I2D* iSetArray(int rows, int cols, int val);
+void iResetArray(I2D* out, int rows, int cols, int val);
 F2D* fSetArray(int rows, int cols, float val);
+void fResetArray(F2D* out, int rows, int cols, float val);
 I2D* iDeepCopy(I2D* in);
 F2D* fDeepCopy(F2D* in);
 I2D* iDeepCopyRange(I2D* in, int startRow, int numberRows, int startCol, int numberCols);
 F2D* fDeepCopyRange(F2D* in, int startRow, int numberRows, int startCol, int numberCols);
 F2D* fiDeepCopy(I2D* in);
+void fiCopy(F2D* out, I2D* in);
 I2D* ifDeepCopy(F2D* in);
 
 

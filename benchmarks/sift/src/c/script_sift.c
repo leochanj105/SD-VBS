@@ -47,8 +47,12 @@ int main(int argc, char* argv[])
     }
 
     sprintf(imSrc, "%s/1.bmp", argv[1]);
+    startTime = photonStartTiming();
 
     im = readImage(imSrc);
+    endTime = photonEndTiming();
+    elapsed = photonReportTiming(startTime, endTime);
+    photonPrintTiming(elapsed);
     image = fiDeepCopy(im);
     iFreeHandle(im);
     rows = image->height;
@@ -79,9 +83,9 @@ int main(int argc, char* argv[])
     elapsed = photonReportTiming(startTime, endTime);
     photonPrintTiming(elapsed);
     
-    free(startTime);
-    free(endTime);
-    free(elapsed);
+    //free(startTime);
+    //free(endTime);
+    //free(elapsed);
 
     fFreeHandle(frames);
 

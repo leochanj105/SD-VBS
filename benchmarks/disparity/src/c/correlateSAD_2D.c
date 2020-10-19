@@ -6,13 +6,13 @@ Author: Sravanthi Kota Venkata
 #include <stdlib.h>
 #include "disparity.h"
 
-void correlateSAD_2D(I2D* Ileft, I2D* Iright, I2D* Iright_moved, int win_sz, int disparity, F2D* SAD, F2D* integralImg, F2D* retSAD)
+void correlateSAD_2D(I2D* Ileft, I2D* Iright, I2D* Iright_moved, int win_sz, int disparity, F2D* SAD, F2D* integralImg, F2D* retSAD, I2D* range)
 {
     int rows, cols;
     int i, j, endRM;
-    I2D *range;
+    //I2D *range;
     
-    range = iMallocHandle(1,2);
+    //iResetArray(range,1,2,0);
     subsref(range,0,0) = 0;
     subsref(range,0,1) = disparity;
 
@@ -28,7 +28,7 @@ void correlateSAD_2D(I2D* Ileft, I2D* Iright, I2D* Iright_moved, int win_sz, int
     integralImage2D2D(SAD, integralImg);
     finalSAD(integralImg, win_sz, retSAD);
 
-    iFreeHandle(range);    
+    //iFreeHandle(range);    
     return;
 }
 

@@ -34,8 +34,11 @@ int main(int argc, char* argv[])
     F2D *STDDEV_GPSPos;
     F2D *ones, *randW;
 
-    unsigned int* start, *endC, *elapsed, *elt;
+    unsigned int* start, *endC, *elapsed, *elt, *inter;
     char im1[100];
+
+
+    elapsed = (unsigned int*)malloc(sizeof(unsigned int) * 2);
 
     if(argc < 2) 
     {
@@ -44,13 +47,8 @@ int main(int argc, char* argv[])
     }
 
     sprintf(im1, "%s/1.txt", argv[1]);
-    start = photonStartTiming(); 
 
     fid = readFile(im1);
-    endC = photonEndTiming();
-    elapsed = photonReportTiming(start, endC);
-
-    photonPrintTiming(elapsed);
 
     n = 1000;
 
@@ -97,6 +95,11 @@ int main(int argc, char* argv[])
         fFreeHandle(randn);
     }
 
+
+    //starting..
+    int iter = 5;
+    for(int it = 0; it < iter; it++){
+	    printf("iteration %d\n", it);
     /** Start Timing **/ 
     start = photonStartTiming(); 
  
@@ -132,9 +135,11 @@ int main(int argc, char* argv[])
     
     /** Timing utils **/   
     endC = photonEndTiming();
-    elapsed = photonReportTiming(start, endC);
-    free(start);
-    free(endC);
+    inter = photonReportTiming(start, endC);
+    elapsed[0] = inter[0];
+    elapsed[1] = inter[1];
+    //free(start);
+    //free(endC);
 
     rows =0;
     cols = 5;
@@ -481,9 +486,9 @@ int main(int argc, char* argv[])
     elapsed[0] += elt[0];
     elapsed[1] += elt[1];
 
-    free(start);
-    free(endC);
-    free(elt);
+    //free(start);
+    //free(endC);
+    //free(elt);
 
         // Self check
         {
@@ -530,6 +535,9 @@ int main(int argc, char* argv[])
 #endif
 
     photonPrintTiming(elapsed);
+    }
+//end
+    printf("end..\n");
     fFreeHandle(STDDEV_GPSPos);
     free(elapsed);
     iFreeHandle(index);

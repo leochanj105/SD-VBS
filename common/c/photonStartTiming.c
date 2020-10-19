@@ -13,9 +13,9 @@ Author: Sravanthi Kota Venkata
 
 unsigned int* photonStartTiming()
 {
-	unsigned int *array;
+	static unsigned int array[2];
 
-    array = (unsigned int*)malloc(sizeof(unsigned int)*2);
+    //array = (unsigned int*)m1alloc(sizeof(unsigned int)*2);
 	magic_timing_begin(array[0], array[1]);
     return array;
 }
