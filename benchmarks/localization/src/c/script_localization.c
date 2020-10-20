@@ -4,8 +4,9 @@ Author: Sravanthi Kota Venkata
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <malloc.h>
 #include "localization.h"
-
+#define LOCOLIZATION_MEM 1<<24
 int main(int argc, char* argv[])
 {
     int n, i, j, k, icount=-1;
@@ -34,7 +35,7 @@ int main(int argc, char* argv[])
     F2D *STDDEV_GPSPos;
     F2D *ones, *randW;
 
-    unsigned int* start, *endC, *elapsed, *elt, *inter;
+    unsigned int* start, *endC, *elapsed, *elt;
     char im1[100];
 
 
@@ -45,6 +46,10 @@ int main(int argc, char* argv[])
         printf("We need input image path\n");
         return -1;
     }
+
+
+    mallopt(M_TOP_PAD, LOCOLIZATION_MEM);
+    mallopt(M_MMAP_MAX, 0);
 
     sprintf(im1, "%s/1.txt", argv[1]);
 
@@ -82,24 +87,29 @@ int main(int argc, char* argv[])
     pos = fSetArray(n, 3, 0);
     vel = fSetArray(n, 3, 0);
     ones = fSetArray(n,1,1);
-   
+
+    
+    F2D *randn;
+
+    randn = randWrapper(n,3);
+    //starting..
+    int iter = 20;
+    for(int it = 0; it < iter; it++){
+	    printf("iteration %d\n", it);
+    fResetArray(pos,n, 3, 0);
+    fResetArray(vel,n, 3, 0);
+    fResetArray(ones,n,1,1);
+
     {
         int j;
-        F2D *randn;
-        randn = randWrapper(n,3);
 
         for(i=0; i<n; i++)
             for(j=0; j<3; j++)
                 subsref(vel, i, j) += subsref(randn,i,j) * STDDEV_ODOVel;
 
-        fFreeHandle(randn);
     }
 
 
-    //starting..
-    int iter = 5;
-    for(int it = 0; it < iter; it++){
-	    printf("iteration %d\n", it);
     /** Start Timing **/ 
     start = photonStartTiming(); 
  
@@ -135,17 +145,17 @@ int main(int argc, char* argv[])
     
     /** Timing utils **/   
     endC = photonEndTiming();
-    inter = photonReportTiming(start, endC);
-    elapsed[0] = inter[0];
-    elapsed[1] = inter[1];
-    //free(start);
-    //free(endC);
+    elt = photonReportTiming(start, endC);
+    elapsed[0] = elt[0];
+    elapsed[1] = elt[1];
+    free(start);
+    free(endC);
 
     rows =0;
     cols = 5;
     STDDEV_GPSPos = fSetArray(3,3,0);
     randW = randnWrapper(n,3);
-
+    icount=-1;
     while(1)
     {
         icount=icount+1;
@@ -486,9 +496,9 @@ int main(int argc, char* argv[])
     elapsed[0] += elt[0];
     elapsed[1] += elt[1];
 
-    //free(start);
-    //free(endC);
-    //free(elt);
+    free(start);
+    free(endC);
+    free(elt);
 
         // Self check
         {
@@ -550,7 +560,7 @@ int main(int argc, char* argv[])
     fFreeHandle(quat);
     fFreeHandle(ones);
     fFreeHandle(randW);
-    
+    fFreeHandle(randn);
     return 0;
 
 }

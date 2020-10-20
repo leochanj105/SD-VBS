@@ -4,7 +4,7 @@ Author: Sravanthi Kota Venkata
 
 #include "texture.h"
 #include <malloc.h>
-#define TEXTURE_MEM 1<<24
+#define TEXTURE_MEM 1<<28
 int WIDTHin,HEIGHTin;
 F2D *target, *result;
 int WIDTH,HEIGHT;
