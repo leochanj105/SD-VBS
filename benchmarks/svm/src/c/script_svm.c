@@ -5,7 +5,8 @@ Author: Sravanthi Kota Venkata
 #include <stdio.h>
 #include <stdlib.h>
 #include "svm.h"
-
+#include <malloc.h>
+#define SVM_MEM 1<<24
 int main(int argc, char* argv[])
 {
     int iter, N, Ntst, i, j, k, n;
@@ -72,6 +73,8 @@ int main(int argc, char* argv[])
         return -1;
     }
 
+    mallopt(M_TOP_PAD, SVM_MEM);
+    mallopt(M_MMAP_MAX, 0);
     sprintf(im1, "%s/d16trn_1.txt", argv[1]);
     trn1 = readFile(im1);   
 
@@ -84,7 +87,7 @@ int main(int argc, char* argv[])
     sprintf(im1, "%s/d16tst_2.txt", argv[1]);
     tst2 = readFile(im1);       
 
-    int iteration = 5;
+    int iteration = 20;
     printf("start.\n");
     for(int it = 0; it< iteration;it++){
 	    printf("Iteration %d\n", it);
@@ -171,9 +174,9 @@ int main(int argc, char* argv[])
     free(alpha);
     fFreeHandle(Xtst);
     fFreeHandle(Ytst);
-    //free(start);
-    //free(stop);
-    //free(elapsed);
+    free(start);
+    free(stop);
+    free(elapsed);
 
     return 0;
 }
