@@ -126,7 +126,7 @@ int selfCheck(I2D* in1, char* path, int tol);
 int fSelfCheck(F2D* in1, char* path, float tol);
 void writeMatrix(I2D* input, char* inpath);
 void fWriteMatrix(F2D* input, char* inpath);
-
+int iCheck(I2D* in1, I2D* in2);
 
 /** Timing functions **/
 unsigned int* photonEndTiming();

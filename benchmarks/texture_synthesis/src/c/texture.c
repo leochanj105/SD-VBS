@@ -26,15 +26,13 @@ Synthesis parameters (image and neighborhood sizes) are in global
 //void create_texture(F2D *image, F2D *result, params *data)
 void create_texture(F2D *image, params *data)
 {
+
     int i,j,k, ncand, bestx,besty;
     double diff,curdiff;
     int tsx,tsy;
-
+    srand48(1);
     candlistx = (int*)malloc(sizeof(int)*(data->localx*(data->localy+1)+1));
     candlisty = (int*)malloc(sizeof(int)*(data->localx*(data->localy+1)+1));
-
-//    printf("total = %d\t%d\t%d\n", data->localx, data->localy, (data->localx*(data->localy+1)+1));
-
 //    if(!anotherpass) init(result, image,data);
     if(!anotherpass) init(image,data);
     

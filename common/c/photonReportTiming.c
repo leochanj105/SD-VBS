@@ -14,8 +14,8 @@ Author: Sravanthi Kota Venkata
 unsigned int * photonReportTiming(unsigned int* startCycles,unsigned int* endCycles)
 {
 
-    static unsigned int elapsed[2];
-    //elapsed = (unsigned int*)m1alloc(sizeof(unsigned int)*2);
+    static unsigned int *elapsed;
+    elapsed = (unsigned int*)malloc(sizeof(unsigned int)*2);
 	unsigned long long start = (((unsigned long long)0x0) | startCycles[0]) << 32 | startCycles[1];
 	unsigned long long end = (((unsigned long long)0x0) | endCycles[0]) << 32 | endCycles[1];
 	unsigned long long diff = end - start;

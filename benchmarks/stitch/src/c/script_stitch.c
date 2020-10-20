@@ -3,7 +3,8 @@ Author: Sravanthi Kota Venkata
 ********************************/
 
 #include "stitch.h"
-
+#include <malloc.h>
+#define STITCH_MEM 1<<30
 int main(int argc, char* argv[])
 {
     int rows, cols;
@@ -19,6 +20,8 @@ int main(int argc, char* argv[])
         return -1;
     }
 
+    mallopt(M_TOP_PAD, STITCH_MEM);
+    mallopt(M_MMAP_MAX, 0);
     sprintf(im1, "%s/1.bmp", argv[1]);
     sprintf(im2, "%s/2.bmp", argv[1]);
 
@@ -27,6 +30,9 @@ int main(int argc, char* argv[])
     cols = Icur->width;
 
     printf("Input size\t\t- (%dx%d)\n", rows, cols);
+    int iter = 20;
+    for(int it = 0; it< iter;it++){
+	    printf("Iteration %d\n", it);
     start = photonStartTiming();
 
     v = harris(Icur);
@@ -60,17 +66,18 @@ int main(int argc, char* argv[])
     }
 //    /** Self checking done **/
 #endif
+    photonPrintTiming(elapsed);
 
+    }
     iFreeHandle(Icur);
     fFreeHandle(v);
     fFreeHandle(interestPnts);
     fFreeHandle(int1);
     fFreeHandle(int2);
     fFreeHandle(Fcur);
-    //free(start);
-    //free(endC);
+    free(start);
+    free(endC);
 
-    photonPrintTiming(elapsed);
-    //free(elapsed);
+    free(elapsed);
     return 0;
 }

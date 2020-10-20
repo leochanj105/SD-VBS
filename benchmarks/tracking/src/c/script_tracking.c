@@ -3,6 +3,8 @@ Author: Sravanthi Kota Venkata
 ********************************/
 
 #include "tracking.h"
+#include <malloc.h>
+#define TRACKING_MEM 1<<29
 
 int main(int argc, char* argv[])
 {
@@ -30,8 +32,8 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-    sprintf(im1, "%s/1.bmp", argv[1]);
-
+    mallopt(M_TOP_PAD, TRACKING_MEM);
+    mallopt(M_MMAP_MAX, 0);
     N_FEA = 1600;
     WINSZ = 4;
     SUPPRESION_RADIUS = 10.0;
@@ -93,13 +95,26 @@ int main(int argc, char* argv[])
         counter = 4;
     #endif
 
+    I2D* images[counter];
     /** Read input image **/
+    for(count=1; count<=counter; count++)
+    {
+        /** Read image **/
+        sprintf(im1, "%s/%d.bmp", argv[1], count);
+        images[count - 1] = readImage(im1);
+    }
+
+
+    sprintf(im1, "%s/1.bmp", argv[1]);
     Ic = readImage(im1);
     rows = Ic->height;
     cols = Ic->width;
     
-    printf("Input size\t\t- (%dx%d)\n", rows, cols);
     
+    printf("Input size\t\t- (%dx%d)\n", rows, cols);
+    int iter = 20;
+    for(int it = 0; it < iter; it++){
+	    printf("iteration %d\n", it);
     /** Start Timing **/
     start = photonStartTiming();
 
@@ -152,24 +167,23 @@ int main(int argc, char* argv[])
     fFreeHandle(interestPnt);
     fFreeHandle(lambda);
     fFreeHandle(lambdaTemp);
-    iFreeHandle(Ic);
     free(start);
     free(end);
-
 /** Until now, we processed base frame. The following for loop processes other frames **/
 for(count=1; count<=counter; count++)
 {
     /** Read image **/
-    sprintf(im1, "%s/%d.bmp", argv[1], count);
-    Ic = readImage(im1);
-    rows = Ic->height;
-    cols = Ic->width;
+    //sprintf(im1, "%s/%d.bmp", argv[1], count);
+    //Ic = readImage(im1);
+    I2D* Icc = images[count-1];
+    rows = Icc->height;
+    cols = Icc->width;
     
     /* Start timing */
     start = photonStartTiming();
 
     /** Blur image to remove noise **/
-    blurredImage = imageBlur(Ic);
+    blurredImage = imageBlur(Icc);
     previousFrameBlurred_level1 = fDeepCopy(blurred_level1);
     previousFrameBlurred_level2 = fDeepCopy(blurred_level2);
     
@@ -191,13 +205,13 @@ for(count=1; count<=counter; count++)
         
     /** Based on features computed in the previous frame, find correspondence in the current frame. "status" returns the index of corresponding features **/
     status = calcPyrLKTrack(previousFrameBlurred_level1, previousFrameBlurred_level2, verticalEdge_level1, verticalEdge_level2, horizontalEdge_level1, horizontalEdge_level2, blurred_level1, blurred_level2, features, features->width, WINSZ, accuracy, LK_ITER, newpoints);
-    
     fFreeHandle(verticalEdge_level1);
     fFreeHandle(verticalEdge_level2);
     fFreeHandle(horizontalEdge_level1);
     fFreeHandle(horizontalEdge_level2);
     fFreeHandle(previousFrameBlurred_level1);
     fFreeHandle(previousFrameBlurred_level2);
+    //printf("height = %d, width = %d, numFind = %d\n", newpoints->height, newpoints->width);
     
     /** Populate newpoints with features that had correspondence with previous frame features **/
     np_temp = fDeepCopy(newpoints);
@@ -224,9 +238,9 @@ for(count=1; count<=counter; count++)
     }    
         
     iFreeHandle(status);
-    iFreeHandle(Ic);
     fFreeHandle(np_temp);
     fFreeHandle(features);
+
     /** Populate newpoints into features **/
     features = fDeepCopy(newpoints);
     fFreeHandle(newpoints);
@@ -237,9 +251,9 @@ for(count=1; count<=counter; count++)
     elapsed[0] += elt[0];
     elapsed[1] += elt[1];
     
-    free(start);
-    free(elt);
-    free(end);   
+    //free(start);
+    //free(elt);
+    //free(end);   
 }
 
 #ifdef CHECK   
@@ -257,12 +271,17 @@ for(count=1; count<=counter; count++)
 #endif
     
     photonPrintTiming(elapsed);
-
+    }
     fFreeHandle(blurred_level1);
     fFreeHandle(blurred_level2);
     fFreeHandle(features);
 
-    free(elapsed);
+    for(count=1; count<=counter; count++)
+    {
+        free(images[count - 1] );
+    }
+    iFreeHandle(Ic);
+    //free(elapsed);
 
     return 0;
 

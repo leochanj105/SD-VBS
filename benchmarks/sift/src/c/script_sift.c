@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
     cols = image->width;
 
 
-    int iter = 5;
+    int iter = 20;
     printf("start\n");
 
    for(int it = 0; it < iter; it++){
@@ -94,9 +94,9 @@ int main(int argc, char* argv[])
     photonPrintTiming(elapsed);
     }
     printf("end\n");
-    //free(startTime);
-    //free(endTime);
-    //free(elapsed);
+    free(startTime);
+    free(endTime);
+    free(elapsed);
     iFreeHandle(im);
     //fFreeHandle(image);
     fFreeHandle(frames);

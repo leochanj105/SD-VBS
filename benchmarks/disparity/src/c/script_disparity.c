@@ -142,9 +142,9 @@ int main(int argc, char* argv[])
     iFreeHandle(retDisparity);
     iFreeHandle(halfWin);
     iFreeHandle(range);
-    //free(start);
-    //free(endC);
-    //free(elapsed);
+    free(start);
+    free(endC);
+    free(elapsed);
 
     return 0;
 }

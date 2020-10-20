@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
     output = iMallocHandle(height, width);
 
     printf("Input size\t\t- (%dx%d)\n", im->height, im->width);
-    sbrk(1<<4);
+    //sbrk(1<<4);
 int iter = 5;
 for(int i = 0; i < iter; i++){
 	printf("iteration %d\n", i);
@@ -84,7 +84,10 @@ for(int i = 0; i < iter; i++){
 
     photonPrintTiming(elapsed);
 }
-sbrk(1<<4);
+//sbrk(1<<4);
+    free(start);
+    free(endC);
+    free(elapsed);
     iFreeHandle(im); 
     free(edges);
     free(segments);

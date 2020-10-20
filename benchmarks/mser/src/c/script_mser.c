@@ -115,10 +115,9 @@ int main(int argc, char* argv[])
     }
    printf("end..\n");
   //end 
-    //free(start); 
-    //free(endC); 
-    //free(elapsed); 
-    
+    free(start); 
+    free(endC); 
+    free(elapsed); 
     free(dims);
     free( forest_pt  ) ;
     free( pairs_pt   ) ;

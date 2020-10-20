@@ -14,7 +14,7 @@ I2D* iMallocHandle(int rows, int cols)
     out = (I2D*)malloc(sizeof(I2D) + sizeof(int)*rows*cols);
     out->height = rows;
     out->width = cols;
-    printf("imalloc happened\n");
+    //printf("imalloc happened\n");
     return out;
 }
 

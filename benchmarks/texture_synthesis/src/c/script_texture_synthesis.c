@@ -3,7 +3,8 @@ Author: Sravanthi Kota Venkata
 ********************************/
 
 #include "texture.h"
-
+#include <malloc.h>
+#define TEXTURE_MEM 1<<24
 int WIDTHin,HEIGHTin;
 F2D *target, *result;
 int WIDTH,HEIGHT;
@@ -18,20 +19,23 @@ int  main(int argc, char **argv)
     I2D *im;
     F2D* image;
     unsigned int *start, *end, *elapsed;
-
+    mallopt(M_TOP_PAD, TEXTURE_MEM);
+    mallopt(M_MMAP_MAX, 0);
     data = malloc(sizeof(params));
     im = parse_flags(argc, argv);
     image = fiDeepCopy(im);
     init_params(data);
 
-    int iter = 5;
+    int iter = 20;
     printf("start.\n");
-    for(int i = 0; i < iter; i++){
-	    printf("Iteration %d\n",i);
-	    image = fiDeepCopy(im);
-	    init_params(data);
-	    //printf("%d,%d\n",data->heightout, data->widthout);
+    for(int it = 0; it < iter; it++){
+	    printf("Iteration %d\n",it);
 	    
+    //image = fiDeepCopy(im);
+    //init_params(data);
+
+
+
     start = photonStartTiming();
     create_texture(image, data);
     end = photonEndTiming();
